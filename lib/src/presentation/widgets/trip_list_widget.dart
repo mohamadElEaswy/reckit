@@ -46,8 +46,16 @@ class TripListWidget extends StatelessWidget {
                           SizedBox(
                             height: 48,
                             child: IconButton(
+                              padding: EdgeInsets.all(14),
+                              color: Colors.white,
+                              style: IconButton.styleFrom(
+                                backgroundColor: R.colors.divider,
+                              ),
                               onPressed: () {},
-                              icon: Icon(Icons.settings, color: Colors.white),
+                              icon: Image.asset(
+                                'assets/icons/filter.png',
+                                // height: 22,
+                              ),
                             ),
                           ),
                           SizedBox(width: 16),
@@ -146,10 +154,10 @@ class TripListWidget extends StatelessWidget {
           case (> 500):
             return 1.4;
           case (> 400):
-            return 1.1;
+            return 0.999;
 
           case (> 300):
-            return 1.0;
+            return .89;
           default:
             return 1.4;
         }
