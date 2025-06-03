@@ -12,7 +12,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDesktop = MediaQuery.of(context).size.width >= 600;
+    final isDesktop = MediaQuery.of(context).size.width >= 880;
 
     if (isDesktop) {
       return ConstrainedBox(
@@ -29,7 +29,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               // Logo
               Image.asset('assets/icons/logo.png', height: 40, width: 82),
               const Spacer(),
-
               // Navigation items
               Row(
                 children: [
@@ -98,16 +97,73 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
       );
     } else {
-      return AppBar(
+      return Container(
+        height: height,
+        padding: const EdgeInsets.symmetric(horizontal: 24),
+        decoration: BoxDecoration(
+          color: Colors.black,
+          border: Border(bottom: BorderSide(color: R.colors.divider)),
+        ),
+        child: Row(
+          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            IconButton(
+              icon: Image.asset('assets/icons/menu.png', height: 22, width: 22),
+              onPressed: () {},
+            ),
+            SizedBox(width: 16),
+            Image.asset('assets/icons/logo.png', height: 40, width: 82),
+            const Spacer(),
+            IconButton(
+              icon: Image.asset(
+                'assets/icons/setting.png',
+                height: 22,
+                width: 22,
+              ),
+              onPressed: () {},
+            ),
+            // const SizedBox(width: 8),
+            IconButton(
+              icon: Image.asset('assets/icons/pill.png', height: 22, width: 22),
+              onPressed: () {},
+            ),
+            Padding(
+              padding: const EdgeInsets.all(6.0),
+              child: SizedBox(
+                height: 22,
+                child: VerticalDivider(color: R.colors.divider),
+              ),
+            ),
+            const CircleAvatar(
+              radius: 16,
+              backgroundImage: NetworkImage('https://i.pravatar.cc/150?img=3'),
+            ),
+          ],
+        ),
+      );
+    }
+  }
+}
+ /*AppBar(
         backgroundColor: Colors.black,
         title: const Text('logo', style: TextStyle(color: Colors.orange)),
         actions: [
+          IconButton(
+            icon: Image.asset(
+              'assets/icons/setting.png',
+              height: 22,
+              width: 22,
+            ),
+            onPressed: () {},
+          ),
+          const SizedBox(width: 8),
+          IconButton(
+            icon: Image.asset('assets/icons/pill.png', height: 22, width: 22),
+            onPressed: () {},
+          ),
           IconButton(icon: const Icon(Icons.notifications), onPressed: () {}),
           const CircleAvatar(
             backgroundImage: NetworkImage('https://i.pravatar.cc/150?img=3'),
           ),
         ],
-      );
-    }
-  }
-}
+      )*/

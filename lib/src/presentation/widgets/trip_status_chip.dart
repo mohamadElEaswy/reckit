@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../domain/entities/trip_entity.dart';
 
@@ -13,17 +14,28 @@ class TripStatusChip extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       decoration: BoxDecoration(
-        color: statusConfig.backgroundColor,
+        color: statusConfig.backgroundColor.withValues(alpha: 0.2),
         borderRadius: BorderRadius.circular(16),
         border: Border.all(color: statusConfig.borderColor, width: 1),
       ),
-      child: Text(
-        status.displayName,
-        style: TextStyle(
-          color: statusConfig.textColor,
-          fontSize: 12,
-          fontWeight: FontWeight.w600,
-        ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            status.displayName,
+            style: TextStyle(
+              color: statusConfig.textColor,
+              fontSize: 12,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          if (status != TripStatus.readyForTravel) ...[
+            const SizedBox(width: 4),
+            Icon(CupertinoIcons.chevron_down, size: 12, color: Colors.white),
+          ],
+        ],
       ),
     );
   }

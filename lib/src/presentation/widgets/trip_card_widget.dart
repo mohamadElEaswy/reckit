@@ -87,10 +87,10 @@ class TripCardWidget extends StatelessWidget {
                       begin: Alignment.bottomCenter,
                       end: Alignment.topCenter,
                       colors: [
-                        R.colors.grey.withValues(alpha: 0.85),
-                        R.colors.grey.withValues(alpha: 0.40),
+                        R.colors.grey.withValues(alpha: 0.95),
+                        R.colors.grey.withValues(alpha: 0.50),
                       ],
-                      stops: [0.4, 1.0],
+                      stops: [0.2, .50],
                     ),
                   ),
                 ),
@@ -98,14 +98,20 @@ class TripCardWidget extends StatelessWidget {
               Positioned(
                 top: 8,
                 right: 8,
-                child: Container(
-                  width: 44,
-                  height: 44,
-                  decoration: BoxDecoration(
-                    color: Colors.black.withValues(alpha: 0.6),
-                    shape: BoxShape.circle,
+                child: InkWell(
+                  onTap: () {},
+                  child: Container(
+                    width: 44,
+                    height: 44,
+                    decoration: BoxDecoration(
+                      color: Colors.black.withValues(alpha: 0.6),
+                      shape: BoxShape.circle,
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: Image.asset('assets/icons/more.png'),
+                    ),
                   ),
-                  child: Icon(Icons.more_horiz, color: Colors.white, size: 24),
                 ),
               ),
               Positioned(
