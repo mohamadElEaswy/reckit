@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:reckit/src/constants/r.dart';
 import '../../domain/entities/trip_entity.dart';
 
 class AvatarStack extends StatelessWidget {
@@ -6,9 +7,9 @@ class AvatarStack extends StatelessWidget {
   final int additionalCount;
   final double avatarSize;
   final double overlapOffset;
-  final Color borderColor;
+  final Color? borderColor;
   final double borderWidth;
-  final Color additionalCountBackgroundColor;
+  final Color? additionalCountBackgroundColor;
   final TextStyle? additionalCountTextStyle;
 
   const AvatarStack({
@@ -17,9 +18,9 @@ class AvatarStack extends StatelessWidget {
     this.additionalCount = 0,
     this.avatarSize = 36.0,
     this.overlapOffset = 16.0,
-    this.borderColor = Colors.white,
-    this.borderWidth = 2.0,
-    this.additionalCountBackgroundColor = Colors.orange,
+    this.borderColor,
+    this.borderWidth = 1.0,
+    this.additionalCountBackgroundColor,
     this.additionalCountTextStyle,
   });
 
@@ -31,13 +32,19 @@ class AvatarStack extends StatelessWidget {
       fontWeight: FontWeight.bold,
     );
 
+    // Limit to 3 visible avatars
+    final visibleParticipants = participant.take(3).toList();
+    final remainingCount = participant.length - 3;
+    final totalAdditionalCount =
+        additionalCount + (remainingCount > 0 ? remainingCount : 0);
+
     return SizedBox(
       height: avatarSize,
       width: _calculateTotalWidth(),
       child: Stack(
         children: [
-          // Avatar images
-          ...participant.asMap().entries.map((entry) {
+          // Avatar images (max 3)
+          ...visibleParticipants.asMap().entries.map((entry) {
             int index = entry.key;
             String url = entry.value.avatarUrl;
 
@@ -54,15 +61,16 @@ class AvatarStack extends StatelessWidget {
           }),
 
           // Additional count indicator
-          if (additionalCount > 0)
+          if (totalAdditionalCount > 0)
             Positioned(
-              left: participant.length * overlapOffset,
+              left: visibleParticipants.length * overlapOffset,
               child: _buildAvatar(
                 child: CircleAvatar(
                   radius: (avatarSize - borderWidth * 2) / 2,
-                  backgroundColor: additionalCountBackgroundColor,
+                  backgroundColor:
+                      additionalCountBackgroundColor ?? R.colors.divider,
                   child: Text(
-                    '+$additionalCount',
+                    '+$totalAdditionalCount',
                     style: additionalCountTextStyle ?? defaultTextStyle,
                   ),
                 ),
@@ -79,14 +87,23 @@ class AvatarStack extends StatelessWidget {
       height: avatarSize,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        // border: Border.all(color: borderColor, width: borderWidth),
+        border: Border.all(
+          color: borderColor ?? R.colors.divider,
+          width: borderWidth,
+        ),
       ),
       child: child,
     );
   }
 
   double _calculateTotalWidth() {
-    int totalAvatars = participant.length + (additionalCount > 0 ? 1 : 0);
+    final visibleParticipants = participant.take(3).toList();
+    final remainingCount = participant.length - 3;
+    final totalAdditionalCount =
+        additionalCount + (remainingCount > 0 ? remainingCount : 0);
+
+    int totalAvatars =
+        visibleParticipants.length + (totalAdditionalCount > 0 ? 1 : 0);
     if (totalAvatars <= 1) return avatarSize;
     return (totalAvatars - 1) * overlapOffset + avatarSize;
   }

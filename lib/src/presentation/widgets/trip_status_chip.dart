@@ -32,25 +32,25 @@ class TripStatusChip extends StatelessWidget {
     switch (status) {
       case TripStatus.proposalSent:
         return _StatusConfig(
-          backgroundColor: Colors.blue[900]!.withOpacity(0.3),
+          backgroundColor: Colors.blue[900]!.withValues(alpha: 0.3),
           borderColor: Colors.blue[400]!,
           textColor: Colors.blue[300]!,
         );
       case TripStatus.pendingApproval:
         return _StatusConfig(
-          backgroundColor: Colors.orange[900]!.withOpacity(0.3),
+          backgroundColor: Colors.orange[900]!.withValues(alpha: 0.3),
           borderColor: Colors.orange[400]!,
           textColor: Colors.orange[300]!,
         );
       case TripStatus.readyForTravel:
         return _StatusConfig(
-          backgroundColor: Colors.green[900]!.withOpacity(0.3),
+          backgroundColor: Colors.green[900]!.withValues(alpha: 0.3),
           borderColor: Colors.green[400]!,
           textColor: Colors.green[300]!,
         );
       case TripStatus.completed:
         return _StatusConfig(
-          backgroundColor: Colors.grey[800]!.withOpacity(0.3),
+          backgroundColor: Colors.grey[800]!.withValues(alpha: 0.3),
           borderColor: Colors.grey[500]!,
           textColor: Colors.grey[300]!,
         );

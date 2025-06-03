@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:reckit/src/constants/r.dart';
 import 'package:reckit/src/presentation/pages/home_page.dart';
 
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         scaffoldBackgroundColor: R.colors.background,
-        fontFamily: '',
+        fontFamily: GoogleFonts.roboto().fontFamily,
       ),
       home: const HomePage(),
     );

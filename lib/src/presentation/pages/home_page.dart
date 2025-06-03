@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:reckit/src/constants/r.dart';
 import '../../common_widgets/custom_appbar.dart';
 import '../../domain/entities/trip_entity.dart';
 import '../providers/trip_providers.dart';
@@ -13,6 +14,7 @@ class HomePage extends ConsumerWidget {
     final tripsAsyncValue = ref.watch(tripsProvider);
 
     return Scaffold(
+      backgroundColor: R.colors.background,
       appBar: const CustomAppBar(),
       body: tripsAsyncValue.when(
         data: (trips) => _buildTripsList(trips),

@@ -13,39 +13,35 @@ class TripCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      // height: 420,
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
-          color: R.colors.grey,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(flex: 3, child: _buildCoverImage()),
-            Expanded(
-              flex: 2,
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    _buildHeader(context),
-                    const SizedBox(height: 8),
-                    _buildDates(context),
-                    const SizedBox(height: 12),
-                    Divider(color: R.colors.divider),
-                    const SizedBox(height: 12),
-                    _buildParticipants(context),
-                  ],
-                ),
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8),
+        color: R.colors.grey,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(flex: 3, child: _buildCoverImage()),
+          Expanded(
+            flex: 2,
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  _buildHeader(context),
+                  const SizedBox(height: 6),
+                  _buildDates(context),
+                  const SizedBox(height: 8),
+                  Divider(color: R.colors.divider),
+                  const SizedBox(height: 8),
+                  _buildParticipants(context),
+                ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -87,9 +83,10 @@ class TripCardWidget extends StatelessWidget {
                     begin: Alignment.bottomCenter,
                     end: Alignment.topCenter,
                     colors: [
-                      R.colors.grey,
-                      R.colors.grey.withValues(alpha: 0.0),
+                      R.colors.grey.withValues(alpha: 0.85),
+                      R.colors.grey.withValues(alpha: 0.40),
                     ],
+                    stops: [0.4, 1.0],
                   ),
                 ),
               ),
@@ -101,7 +98,7 @@ class TripCardWidget extends StatelessWidget {
                 width: 44,
                 height: 44,
                 decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.6),
+                  color: Colors.black.withValues(alpha: 0.6),
                   shape: BoxShape.circle,
                 ),
                 child: Icon(Icons.more_horiz, color: Colors.white, size: 24),
@@ -143,9 +140,7 @@ class TripCardWidget extends StatelessWidget {
           ? '${trip.unfinishedTasks} unfinished task${trip.unfinishedTasks != 1 ? 's' : ''}'
           : 'All tasks completed',
       style: Theme.of(context).textTheme.bodySmall?.copyWith(
-        color: trip.unfinishedTasks > 0
-            ? Colors.orange[400]
-            : Colors.green[400],
+        color: Colors.grey[400],
         fontWeight: FontWeight.w500,
       ),
       maxLines: 1,
@@ -155,15 +150,10 @@ class TripCardWidget extends StatelessWidget {
 
   Widget _buildParticipants(BuildContext context) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Icon(Icons.people, size: 24, color: Colors.grey[400]),
-        const SizedBox(width: 6),
-        Expanded(
-          child: AvatarStack(
-            participant: trip.participants,
-            additionalCount: 6,
-          ),
-        ),
+        AvatarStack(participant: trip.participants),
         _buildTasksInfo(context),
       ],
     );
