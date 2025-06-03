@@ -15,7 +15,23 @@ class HomePage extends ConsumerWidget {
 
     return Scaffold(
       backgroundColor: R.colors.background,
-      appBar: const CustomAppBar(),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(76),
+        child: DecoratedBox(
+          decoration: BoxDecoration(
+            color: R.colors.background,
+            border: Border(
+              bottom: BorderSide(color: R.colors.divider, width: 1),
+            ),
+          ),
+          child: Center(
+            child: ConstrainedBox(
+              constraints: BoxConstraints(maxWidth: 1280),
+              child: const CustomAppBar(),
+            ),
+          ),
+        ),
+      ),
       body: tripsAsyncValue.when(
         data: (trips) => _buildTripsList(trips),
         loading: () => const Center(child: CircularProgressIndicator()),
