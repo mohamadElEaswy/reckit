@@ -11,4 +11,5 @@ class AppColors {
   final Color textSecondary = Color(0xff999999);
   final Color textTertiary = Color(0xff555555);
   final Color divider = Color(0xff262626);
+  final Color orange = Color(0xffFFC268);
 }

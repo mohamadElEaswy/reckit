@@ -19,23 +19,25 @@ class TripCardWidget extends StatelessWidget {
         color: R.colors.grey,
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Expanded(flex: 3, child: _buildCoverImage()),
-          Expanded(
-            flex: 2,
+          SizedBox(height: 182, child: _buildCoverImage()),
+
+          SizedBox(
+            height: 140,
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   _buildHeader(context),
-                  const SizedBox(height: 6),
+                  // const SizedBox(height: 6),
                   _buildDates(context),
-                  const SizedBox(height: 8),
+                  // const SizedBox(height: 8),
                   Divider(color: R.colors.divider),
-                  const SizedBox(height: 8),
+                  // const SizedBox(height: 8),
                   _buildParticipants(context),
                 ],
               ),
@@ -47,69 +49,72 @@ class TripCardWidget extends StatelessWidget {
   }
 
   Widget _buildCoverImage() {
-    return ClipRRect(
-      borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
-      child: AspectRatio(
-        aspectRatio: 16 / 9,
-        child: Stack(
-          clipBehavior: Clip.antiAliasWithSaveLayer,
-          children: [
-            CachedNetworkImage(
-              imageUrl: trip.coverImageUrl,
-              fit: BoxFit.cover,
-              width: double.infinity,
-              height: double.infinity,
-              errorWidget: (context, error, stackTrace) {
-                return const Center(
-                  child: Icon(
-                    Icons.image_not_supported,
-                    size: 48,
-                    color: Colors.grey,
-                  ),
-                );
-              },
-              progressIndicatorBuilder: (context, child, loadingProgress) {
-                return Container(
-                  color: Colors.grey[200],
-                  child: const Center(child: CircularProgressIndicator()),
-                );
-              },
-            ),
-            Positioned.fill(
-              bottom: -5,
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.bottomCenter,
-                    end: Alignment.topCenter,
-                    colors: [
-                      R.colors.grey.withValues(alpha: 0.85),
-                      R.colors.grey.withValues(alpha: 0.40),
-                    ],
-                    stops: [0.4, 1.0],
+    return SizedBox(
+      width: double.infinity,
+      child: ClipRRect(
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
+        child: AspectRatio(
+          aspectRatio: 16 / 9,
+          child: Stack(
+            clipBehavior: Clip.antiAliasWithSaveLayer,
+            children: [
+              CachedNetworkImage(
+                imageUrl: trip.coverImageUrl,
+                fit: BoxFit.cover,
+                width: double.infinity,
+                height: double.infinity,
+                errorWidget: (context, error, stackTrace) {
+                  return const Center(
+                    child: Icon(
+                      Icons.image_not_supported,
+                      size: 48,
+                      color: Colors.grey,
+                    ),
+                  );
+                },
+                progressIndicatorBuilder: (context, child, loadingProgress) {
+                  return Container(
+                    color: Colors.grey[200],
+                    child: const Center(child: CircularProgressIndicator()),
+                  );
+                },
+              ),
+              Positioned.fill(
+                bottom: -5,
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.bottomCenter,
+                      end: Alignment.topCenter,
+                      colors: [
+                        R.colors.grey.withValues(alpha: 0.85),
+                        R.colors.grey.withValues(alpha: 0.40),
+                      ],
+                      stops: [0.4, 1.0],
+                    ),
                   ),
                 ),
               ),
-            ),
-            Positioned(
-              top: 8,
-              right: 8,
-              child: Container(
-                width: 44,
-                height: 44,
-                decoration: BoxDecoration(
-                  color: Colors.black.withValues(alpha: 0.6),
-                  shape: BoxShape.circle,
+              Positioned(
+                top: 8,
+                right: 8,
+                child: Container(
+                  width: 44,
+                  height: 44,
+                  decoration: BoxDecoration(
+                    color: Colors.black.withValues(alpha: 0.6),
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(Icons.more_horiz, color: Colors.white, size: 24),
                 ),
-                child: Icon(Icons.more_horiz, color: Colors.white, size: 24),
               ),
-            ),
-            Positioned(
-              bottom: 0,
-              left: 15,
-              child: TripStatusChip(status: trip.status),
-            ),
-          ],
+              Positioned(
+                bottom: 0,
+                left: 15,
+                child: TripStatusChip(status: trip.status),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -142,9 +147,11 @@ class TripCardWidget extends StatelessWidget {
       style: Theme.of(context).textTheme.bodySmall?.copyWith(
         color: Colors.grey[400],
         fontWeight: FontWeight.w500,
+        fontSize: 12,
       ),
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
+      softWrap: true,
     );
   }
 

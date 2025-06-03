@@ -10,18 +10,16 @@ class AvatarStack extends StatelessWidget {
   final Color? borderColor;
   final double borderWidth;
   final Color? additionalCountBackgroundColor;
-  final TextStyle? additionalCountTextStyle;
 
   const AvatarStack({
     super.key,
     required this.participant,
     this.additionalCount = 0,
-    this.avatarSize = 36.0,
-    this.overlapOffset = 16.0,
+    this.avatarSize = 24.0,
+    this.overlapOffset = 8.0,
     this.borderColor,
     this.borderWidth = 1.0,
     this.additionalCountBackgroundColor,
-    this.additionalCountTextStyle,
   });
 
   @override
@@ -71,7 +69,7 @@ class AvatarStack extends StatelessWidget {
                       additionalCountBackgroundColor ?? R.colors.divider,
                   child: Text(
                     '+$totalAdditionalCount',
-                    style: additionalCountTextStyle ?? defaultTextStyle,
+                    style: defaultTextStyle.copyWith(color: R.colors.orange),
                   ),
                 ),
               ),
