@@ -1,6 +1,11 @@
+// import 'dart:developer';
+
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:reckit/src/common_widgets/appbar_item.dart';
 import 'package:reckit/src/constants/r.dart';
+import 'package:reckit/src/presentation/widgets/custom_image_render_web.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final double height;
@@ -71,11 +76,43 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                   // Profile with dropdown
                   Row(
                     children: [
-                      const CircleAvatar(
+                      CircleAvatar(
                         radius: 16,
-                        backgroundImage: NetworkImage(
-                          'https://i.pravatar.cc/150?img=3',
-                        ),
+                        child: (kIsWeb)
+                            ? ClipRRect(
+                                borderRadius: BorderRadiusGeometry.all(
+                                  Radius.circular(100),
+                                ),
+                                child: CustomImageRenderWeb(
+                                  'https://randomuser.me/api/portraits/men/22.jpg',
+                                ),
+                              )
+                            : CachedNetworkImage(
+                                imageUrl:
+                                    'https://randomuser.me/api/portraits/men/22.jpg',
+                                fit: BoxFit.cover,
+                                width: double.infinity,
+                                height: double.infinity,
+                                errorWidget: (context, error, stackTrace) {
+                                  // log(error);
+                                  return const Center(
+                                    child: Icon(
+                                      Icons.image_not_supported,
+                                      size: 16,
+                                      color: Colors.grey,
+                                    ),
+                                  );
+                                },
+                                progressIndicatorBuilder:
+                                    (context, child, loadingProgress) {
+                                      return Container(
+                                        color: Colors.grey[200],
+                                        child: const Center(
+                                          child: CircularProgressIndicator(),
+                                        ),
+                                      );
+                                    },
+                              ),
                       ),
                       const SizedBox(width: 8),
                       const Text(

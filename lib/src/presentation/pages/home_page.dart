@@ -69,7 +69,6 @@ class HomePage extends ConsumerWidget {
         child: Text('No trips found', style: TextStyle(fontSize: 18)),
       );
     }
-
     return TripListWidget(trips: trips);
   }
 }

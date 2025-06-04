@@ -47,10 +47,10 @@ class TripCardCoverImage extends StatelessWidget {
                       begin: Alignment.bottomCenter,
                       end: Alignment.topCenter,
                       colors: [
-                        R.colors.grey.withValues(alpha: 0.95),
-                        R.colors.grey.withValues(alpha: 0.50),
+                        R.colors.grey,
+                        R.colors.grey.withValues(alpha: 0.40),
                       ],
-                      stops: [0.2, .50],
+                      stops: [0.1, .60],
                     ),
                   ),
                 ),

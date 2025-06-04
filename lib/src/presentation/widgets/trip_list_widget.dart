@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:reckit/src/constants/r.dart';
 import 'package:reckit/src/presentation/widgets/trip_card_widget/trip_card_widget.dart';
@@ -13,6 +11,7 @@ class TripListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double width = MediaQuery.of(context).size.width;
+    final isDesktop = MediaQuery.of(context).size.width >= 880;
     return Center(
       child: ConstrainedBox(
         constraints: BoxConstraints(maxWidth: 1280),
@@ -58,29 +57,32 @@ class TripListWidget extends StatelessWidget {
                               ),
                             ),
                           ),
-                          SizedBox(width: 16),
-                          SizedBox(
-                            height: 48,
-                            width: 177,
-                            child: ElevatedButton.icon(
-                              onPressed: () {},
-                              icon: Icon(Icons.add, color: Colors.black),
-                              label: Text(
-                                'Add a New Item',
-                                style: Theme.of(context).textTheme.bodyMedium
-                                    ?.copyWith(color: Colors.black),
-                              ),
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: R.colors.orange,
+                          if (isDesktop) ...[
+                            SizedBox(width: 16),
+                            SizedBox(
+                              height: 48,
+                              width: 177,
+                              child: ElevatedButton.icon(
+                                onPressed: () {},
+                                icon: Icon(Icons.add, color: Colors.black),
+                                label: Text(
+                                  'Add a New Item',
+                                  style: Theme.of(context).textTheme.bodyMedium
+                                      ?.copyWith(color: Colors.black),
+                                ),
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: R.colors.orange,
+                                ),
                               ),
                             ),
-                          ),
+                          ],
                         ],
                       ),
                     ],
                   ),
                 ),
               ),
+              SliverToBoxAdapter(child: SizedBox(height: isDesktop ? 32 : 16)),
               SliverGrid(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: _getCrossAxisCount(width),
@@ -102,7 +104,7 @@ class TripListWidget extends StatelessWidget {
   }
 
   int _getCrossAxisCount(double width) {
-    log('$width');
+    // log('$width');
     switch (width) {
       case (> 1400):
         return 5;
