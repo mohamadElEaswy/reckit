@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:reckit/src/constants/r.dart';
-import 'package:reckit/src/presentation/widgets/trip_card_widget.dart';
+import 'package:reckit/src/presentation/widgets/trip_card_widget/trip_card_widget.dart';
 import '../../domain/entities/trip_entity.dart';
 
 class TripListWidget extends StatelessWidget {
@@ -86,9 +86,7 @@ class TripListWidget extends StatelessWidget {
                   crossAxisCount: _getCrossAxisCount(width),
                   crossAxisSpacing: 16.0,
                   mainAxisSpacing: 16.0,
-                  childAspectRatio: _responsveChildAspectRatio(
-                    width,
-                  ), //_responsveChildAspectRatio(width),
+                  childAspectRatio: _responsveChildAspectRatio(width),
                 ),
                 delegate: SliverChildBuilderDelegate((context, index) {
                   final trip = trips[index];

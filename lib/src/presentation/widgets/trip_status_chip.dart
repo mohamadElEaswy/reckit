@@ -28,7 +28,7 @@ class TripStatusChip extends StatelessWidget {
             style: TextStyle(
               color: statusConfig.textColor,
               fontSize: 12,
-              fontWeight: FontWeight.w600,
+              fontWeight: FontWeight.normal,
             ),
           ),
           if (status != TripStatus.readyForTravel) ...[
